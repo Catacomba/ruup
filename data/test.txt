@@ -1,2 +1,0 @@
--w https://www.google.com -l 2 -s 1 -g
--w https://sajko-turizem.si -l 4 -s 2 -g
