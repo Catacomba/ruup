@@ -1,0 +1,113 @@
+INFO 2025-04-18 13:59:09,573 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:00:01,677 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:00:29,188 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:01:19,366 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:01:25,099 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:01:46,864 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:02:32,493 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:02:51,937 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:03:40,621 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+ERROR 2025-04-18 14:03:40,660 [checker.py:check_website_status:70] None Exception Invalid URL 'None': No scheme supplied. Perhaps you meant https://None?
+WARNING 2025-04-18 14:03:40,661 [main.py:logInfo:26] [None] status: []
+INFO 2025-04-18 14:03:58,997 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+WARNING 2025-04-18 14:03:59,230 [main.py:logInfo:26] [https://google.com] status: [301]
+INFO 2025-04-18 14:04:08,042 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+ERROR 2025-04-18 14:04:08,080 [checker.py:check_website_status:70] google.com Exception Invalid URL 'google.com': No scheme supplied. Perhaps you meant https://google.com?
+WARNING 2025-04-18 14:04:08,081 [main.py:logInfo:26] [google.com] status: []
+INFO 2025-04-18 14:04:38,988 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:04:39,239 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:04:47,701 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:04:47,971 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:04:50,179 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:04:52,386 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:04:54,596 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:04:57,604 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:04:57,831 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:04:57,833 [gui.py:startupGUI:35] Starting GUI task
+INFO 2025-04-18 14:05:00,040 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:02,247 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:04,456 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:06,645 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:08,861 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:11,120 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:13,413 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:15,614 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:18,013 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:20,337 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:22,736 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:25,098 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:27,324 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:29,945 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+ERROR 2025-04-18 14:05:31,950 [checker.py:check_website_status:70] https://www.google.com/ Exception HTTPSConnectionPool(host='www.google.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7191d1932ab0>: Failed to resolve 'www.google.com' ([Errno -2] Name or service not known)"))
+WARNING 2025-04-18 14:05:31,953 [main.py:logInfo:26] [https://www.google.com/] status: []
+ERROR 2025-04-18 14:05:33,959 [checker.py:check_website_status:70] https://www.google.com/ Exception HTTPSConnectionPool(host='www.google.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7191d19304d0>: Failed to resolve 'www.google.com' ([Errno -2] Name or service not known)"))
+WARNING 2025-04-18 14:05:33,965 [main.py:logInfo:26] [https://www.google.com/] status: []
+ERROR 2025-04-18 14:05:35,968 [checker.py:check_website_status:70] https://www.google.com/ Exception HTTPSConnectionPool(host='www.google.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7191d1964ef0>: Failed to resolve 'www.google.com' ([Errno -2] Name or service not known)"))
+WARNING 2025-04-18 14:05:35,972 [main.py:logInfo:26] [https://www.google.com/] status: []
+ERROR 2025-04-18 14:05:37,978 [checker.py:check_website_status:70] https://www.google.com/ Exception HTTPSConnectionPool(host='www.google.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7191d1964a10>: Failed to resolve 'www.google.com' ([Errno -2] Name or service not known)"))
+WARNING 2025-04-18 14:05:37,981 [main.py:logInfo:26] [https://www.google.com/] status: []
+ERROR 2025-04-18 14:05:39,989 [checker.py:check_website_status:70] https://www.google.com/ Exception HTTPSConnectionPool(host='www.google.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7191d19654f0>: Failed to resolve 'www.google.com' ([Errno -2] Name or service not known)"))
+WARNING 2025-04-18 14:05:39,995 [main.py:logInfo:26] [https://www.google.com/] status: []
+INFO 2025-04-18 14:05:42,189 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:44,380 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:46,579 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:05:48,850 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:24:14,700 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:24:14,866 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:24:14,867 [gui.py:startupGUI:35] Starting GUI task
+INFO 2025-04-18 14:24:16,975 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:24:19,084 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:24:21,193 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:24:23,314 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:24:25,435 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:26:57,451 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:26:57,599 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:26:57,601 [gui.py:startupGUI:28] Starting GUI task
+INFO 2025-04-18 14:26:59,709 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:27:05,996 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:27:06,144 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:27:06,145 [gui.py:startupGUI:28] Starting GUI task
+INFO 2025-04-18 14:27:11,253 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:28:45,090 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:28:45,133 [gui.py:startupGUI:28] Starting GUI task
+INFO 2025-04-18 14:28:45,268 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:28:50,468 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:28:55,586 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:29:00,793 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:29:05,902 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:29:11,017 [main.py:logInfo:24] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:30:58,124 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:30:58,160 [gui.py:startupGUI:28] Starting GUI task
+INFO 2025-04-18 14:30:58,282 [main.py:logInfo:26] [https://www.google.com/] status: [200]
+INFO 2025-04-18 14:32:13,225 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:32:13,261 [gui.py:startupGUI:28] Starting GUI task
+INFO 2025-04-18 14:32:13,386 [main.py:logInfo:26] [https://www.google.com/] status: [200]
+ERROR 2025-04-18 14:32:14,431 [main.py:<module>:42] ruup force ended
+INFO 2025-04-18 14:33:48,623 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:33:48,661 [gui.py:startupGUI:28] Starting GUI task
+INFO 2025-04-18 14:33:48,789 [main.py:logInfo:27] [https://www.google.com/] status: [200]
+ERROR 2025-04-18 14:33:49,736 [main.py:<module>:43] ruup force ended
+INFO 2025-04-18 14:34:56,322 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+ERROR 2025-04-18 14:34:56,360 [checker.py:check_website_status:70] None Exception Invalid URL 'None': No scheme supplied. Perhaps you meant https://None?
+WARNING 2025-04-18 14:34:56,361 [main.py:logInfo:29] [None] status: []
+ERROR 2025-04-18 14:35:01,742 [main.py:<module>:43] ruup force ended
+INFO 2025-04-18 14:35:04,519 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+ERROR 2025-04-18 14:35:04,553 [checker.py:check_website_status:70] None Exception Invalid URL 'None': No scheme supplied. Perhaps you meant https://None?
+WARNING 2025-04-18 14:35:04,554 [main.py:logInfo:29] [None] status: []
+ERROR 2025-04-18 14:35:06,510 [main.py:<module>:43] ruup force ended
+INFO 2025-04-18 14:36:05,384 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:36:25,847 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:37:11,431 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:39:28,330 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:39:49,123 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:48:51,048 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:51:34,828 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 14:52:49,724 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 15:04:22,753 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+ERROR 2025-04-18 15:04:22,788 [checker.py:check_website_status:70] None Exception Invalid URL 'None': No scheme supplied. Perhaps you meant https://None?
+WARNING 2025-04-18 15:04:22,789 [main.py:logInfo:29] [None] status: []
+ERROR 2025-04-18 15:04:24,344 [main.py:<module>:43] ruup force ended
+INFO 2025-04-18 15:04:33,733 [logger.py:<module>:44] Writing logs into: /home/kevin/_repos/ruup/logs/ruup
+INFO 2025-04-18 15:04:33,767 [gui.py:startupGUI:28] Starting GUI task
+INFO 2025-04-18 15:04:33,893 [main.py:logInfo:27] [https://www.google.com/] status: [200]
+ERROR 2025-04-18 15:04:34,567 [main.py:<module>:43] ruup force ended
