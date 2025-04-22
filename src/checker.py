@@ -79,7 +79,7 @@ async def start_website_checker(
                 await asyncio.sleep(_short_sleep)
 
 
-def check_website_status(url, short_sleep, long_sleep, totalPings, remainingPings) -> StatusReport:
+def check_website_status(url, short_sleep, long_sleep, totalPings=-1, remainingPings=-1) -> StatusReport:
     global sleeptime
     try:
         response = requests.head(url)

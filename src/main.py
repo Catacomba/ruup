@@ -92,6 +92,8 @@ async def main():
                 ))
         elif (args.gui):
             tg.create_task(startupGUI())
+
+    if sys.stdin.isatty():
         tg.create_task(start_website_checker(
             url, short_sleep, long_sleep, reps))
 
