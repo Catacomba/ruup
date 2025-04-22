@@ -37,7 +37,7 @@ def unsubscribe(method):
         pass
 
 
-def update_status(report):
+def publish_status(report):
     for subscriber in subscribers:
         subscriber(report)
 
@@ -51,35 +51,41 @@ async def start_website_checker(
                 f"[url: {url}] "
                 f"[short sleep: {short_sleep}] "
                 f"[long sleep: {long_sleep}] "
-                f"[repetitions: {repetitions}]")
+                f"[repetitions:{'unlimited' if repetitions == -1 else repetitions}]")
     _counter = int(repetitions)
     _short_sleep = int(short_sleep)
     _long_sleep = int(long_sleep)
 
     if (_counter == -1):
+        report = check_website_status(url, _short_sleep, _long_sleep)
+        publish_status(report)
         while True:
+            if (report.status == '200'):
+                await asyncio.sleep(_long_sleep)
+            else:
+                await asyncio.sleep(_short_sleep)
             report = check_website_status(url, _short_sleep, _long_sleep)
-            update_status(report)
-            if (report.status == '200'):
-                await asyncio.sleep(_long_sleep)
-            else:
-                await asyncio.sleep(_short_sleep)
+            publish_status(report)
     else:
-        totalPings = _counter
-        while _counter > 0:
-            report = check_website_status(
-                url, _short_sleep, _long_sleep, totalPings, _counter)
-            update_status(report)
-            _counter -= 1
-            if _counter == 0:
-                continue
+        report = check_website_status(
+            url, _short_sleep, _long_sleep)
+        report.totalPings = _counter
+        report.remainingPings = _counter
+        publish_status(report)
+        for i in range(_counter-1):
             if (report.status == '200'):
                 await asyncio.sleep(_long_sleep)
             else:
                 await asyncio.sleep(_short_sleep)
+            report = check_website_status(
+                url, _short_sleep, _long_sleep)
+            report.totalPings = _counter
+            report.remainingPings = _counter-(i+1)
+            publish_status(report)
+        logger.info(f"[{url}] finished pinging")
 
 
-def check_website_status(url, short_sleep, long_sleep, totalPings=-1, remainingPings=-1) -> StatusReport:
+def check_website_status(url, short_sleep, long_sleep) -> StatusReport:
     global sleeptime
     try:
         response = requests.head(url)
@@ -90,8 +96,6 @@ def check_website_status(url, short_sleep, long_sleep, totalPings=-1, remainingP
                 timeout=long_sleep,
                 checkedDateTime=datetime.datetime.now(),
                 displayStyle=statusColors.good_status,
-                totalPings=totalPings,
-                remainingPings=remainingPings,
             )
         else:
             report = StatusReport(
@@ -100,8 +104,6 @@ def check_website_status(url, short_sleep, long_sleep, totalPings=-1, remainingP
                 timeout=short_sleep,
                 checkedDateTime=datetime.datetime.now(),
                 displayStyle=statusColors.bad_status,
-                totalPings=totalPings,
-                remainingPings=remainingPings,
             )
         return report
     except requests.RequestException as e:
@@ -112,7 +114,5 @@ def check_website_status(url, short_sleep, long_sleep, totalPings=-1, remainingP
             timeout=short_sleep,
             checkedDateTime=datetime.datetime.now(),
             displayStyle=statusColors.unknown_status,
-            totalPings=totalPings,
-            remainingPings=remainingPings,
         )
         return report

@@ -21,8 +21,8 @@ repetitions = args.repetitions
 
 def createLogString(report: StatusReport):
     if report.remainingPings != -1:
-        return f'[{report.remainingPings}/{report.totalPings}] [{report.url}] [{report.status}]'
-    return f'[{report.url}] status: [{report.status}]'
+        return f'[{report.url}] [{report.status}] [{report.remainingPings}|{report.totalPings}]'
+    return f'[{report.url}] [{report.status}]'
 
 
 def logInfo(report: StatusReport):
