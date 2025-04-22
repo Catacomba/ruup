@@ -175,4 +175,4 @@ cython_debug/
 
 data/
 /logs
-
+logs/ruup*

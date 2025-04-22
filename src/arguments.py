@@ -3,7 +3,7 @@ from config import prog_name
 
 parser = argparse.ArgumentParser(
     prog=prog_name,
-    description="A simple website monitor",
+    description="r u up? A simple website monitor and status logger",
     usage='%(prog)s [options]')
 
 parser.add_argument(
@@ -22,6 +22,12 @@ parser.add_argument(
     "--short-sleep",
     help="Short sleep time in seconds (used if website is down), default is 30 seconds",
     default=30,
+    type=int)
+parser.add_argument(
+    "-r",
+    "--repetitions",
+    help="Number of times to perform the online check, default is -1 which also represents infinity",
+    default=-1,
     type=int)
 parser.add_argument(
     "-g",
