@@ -18,6 +18,8 @@ long_sleep = args.long_sleep
 short_sleep = args.short_sleep
 repetitions = args.repetitions
 
+summary = {}
+
 
 def createLogString(report: StatusReport):
     if report.remainingPings != -1:
@@ -30,6 +32,50 @@ def logInfo(report: StatusReport):
         logger.info(createLogString(report))
     else:
         logger.warning(createLogString(report))
+
+
+def updateSummary_perfectionist(report: StatusReport):
+    try:
+        # If we get 2 same consecutive statuses, we save the time, else we ignore the time
+        if (summary[report.url]["previousTimeout"] == report.nextTimeout):
+            summary[report.url][str(report.status)
+                                ]["duration"] += report.nextTimeout
+        else:
+            summary[report.url]["previousTimeout"] = report.nextTimeout
+        summary[report.url][str(report.status)]["iterations"] += 1
+    except KeyError:
+        # First iteration
+        summary[report.url] = {}
+        summary[report.url][str(report.status)] = {}
+        summary[report.url][str(report.status)]["duration"] = 0
+        summary[report.url]["previousTimeout"] = report.nextTimeout
+        summary[report.url][str(report.status)]["iterations"] = 1
+    return
+
+
+def updateSummary_badBias(report: StatusReport):
+    return
+
+
+def updateSummary_mixedBias(report: StatusReport):
+    return
+
+
+def updateSummary_goodBias(report: StatusReport):
+    return
+
+
+def updateSummary(report: StatusReport):
+    try:
+
+        summary[report.url][str(report.status)] += 1
+        summary[report.url][str(report.status)
+                            ]["duration"] += report.nextTimeout
+        summary[report.url]["lastStatus"] = report.status
+    except KeyError:
+        # First iteration
+        summary[report.url] = {}
+        summary[report.url][str(report.status)] = 1
 
 
 def is_valid_url(url):
@@ -67,6 +113,7 @@ async def main():
     global long_sleep
     global repetitions
     subscribe_to_status_updates(logInfo)
+    subscribe_to_status_updates(updateSummary_perfectionist)
 
     async with asyncio.TaskGroup() as tg:
         if not sys.stdin.isatty():
@@ -101,8 +148,9 @@ if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
+        logger.info(summary)
         logger.error(f'{prog_name} force ended')
         try:
             sys.exit(130)
         except SystemExit:
-            os._exit(130)
+            os

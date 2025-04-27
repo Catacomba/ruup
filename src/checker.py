@@ -16,7 +16,7 @@ url = args.website_url
 class StatusReport:
     url: str
     status: str
-    timeout: int
+    nextTimeout: int
     checkedDateTime: datetime
     displayStyle: str
     remainingPings: int = -1
@@ -60,6 +60,7 @@ async def start_website_checker(
         report = check_website_status(url, _short_sleep, _long_sleep)
         publish_status(report)
         while True:
+            await asyncio.sleep(report.nextTimeout)
             if (report.status == '200'):
                 await asyncio.sleep(_long_sleep)
             else:
@@ -73,10 +74,7 @@ async def start_website_checker(
         report.remainingPings = _counter
         publish_status(report)
         for i in range(_counter-1):
-            if (report.status == '200'):
-                await asyncio.sleep(_long_sleep)
-            else:
-                await asyncio.sleep(_short_sleep)
+            await asyncio.sleep(report.nextTimeout)
             report = check_website_status(
                 url, _short_sleep, _long_sleep)
             report.totalPings = _counter
@@ -93,7 +91,7 @@ def check_website_status(url, short_sleep, long_sleep) -> StatusReport:
             report = StatusReport(
                 url=url,
                 status=str(response.status_code),
-                timeout=long_sleep,
+                nextTimeout=long_sleep,
                 checkedDateTime=datetime.datetime.now(),
                 displayStyle=statusColors.good_status,
             )
@@ -101,7 +99,7 @@ def check_website_status(url, short_sleep, long_sleep) -> StatusReport:
             report = StatusReport(
                 url=url,
                 status=str(response.status_code),
-                timeout=short_sleep,
+                nextTimeout=short_sleep,
                 checkedDateTime=datetime.datetime.now(),
                 displayStyle=statusColors.bad_status,
             )
@@ -111,7 +109,7 @@ def check_website_status(url, short_sleep, long_sleep) -> StatusReport:
         report = StatusReport(
             url=url,
             status='',
-            timeout=short_sleep,
+            nextTimeout=short_sleep,
             checkedDateTime=datetime.datetime.now(),
             displayStyle=statusColors.unknown_status,
         )
