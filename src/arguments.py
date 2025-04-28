@@ -35,8 +35,14 @@ parser.add_argument(
     help="Display the full screen GUI",
     action='store_true')
 parser.add_argument(
+    "-p",
+    "--status-priority",
+    default=True,
+    help="Defines what to do when adding duration to summary and status differs from previous status. If true add duration to new status, if false add duration to old status",
+    type=bool)
+parser.add_argument(
     "-hs",
-    "--history_size",
+    "--history-size",
     default=20,
     help="Number of lines to display in the GUI history. Default is 20",
     type=int)

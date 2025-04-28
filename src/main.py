@@ -1,6 +1,5 @@
 import asyncio
 import re
-import time
 import os
 import sys
 from config import prog_name
@@ -12,13 +11,26 @@ from checker import (
     subscribe_to_status_updates,
     StatusReport
 )
+from dataclasses import dataclass
 
-url = args.website_url
-long_sleep = args.long_sleep
-short_sleep = args.short_sleep
-repetitions = args.repetitions
+_url = args.website_url
+_long_sleep = args.long_sleep
+_short_sleep = args.short_sleep
+_repetitions = args.repetitions
+_status_priority = args.status_priority
 
 summary = {}
+
+
+@dataclass
+class StatusSummary:
+    totalDuration: int  # in seconds
+    occurences: int
+
+    def __iadd(self, other):
+        if (isinstance(other, StatusSummary)):
+            self.totalDuration += other.totalDuration
+            self.occurences += other.occurences
 
 
 def createLogString(report: StatusReport):
@@ -34,48 +46,77 @@ def logInfo(report: StatusReport):
         logger.warning(createLogString(report))
 
 
-def updateSummary_perfectionist(report: StatusReport):
-    try:
-        # If we get 2 same consecutive statuses, we save the time, else we ignore the time
-        if (summary[report.url]["previousTimeout"] == report.nextTimeout):
-            summary[report.url][str(report.status)
-                                ]["duration"] += report.nextTimeout
+def updateSummaryKey_safe(url: str, newStatus: str, nextTimeout: int):
+    global summary
+    incrementOccurence(url, newStatus)
+    if (summary[f'{url}']['lastStatus'] == newStatus):
+        # If status is same, we can be confiedent that the status didnt change and duration is valid
+        addDuration(url, newStatus)
+    else:
+        # Since status changed, we are unsure when it did so, so we dont assign durations to noone
+        updateUrlData(newStatus, nextTimeout, url)
+
+
+def updateSummaryKey_unsafe(url: str, newStatus: str, nextTimeout: int):
+    global summary
+    global status_priority
+    incrementOccurence(url, newStatus)
+    if (summary[f'{url}']['lastStatus'] == newStatus):
+        addDuration(url, newStatus)
+    else:
+        if (status_priority):
+            # new status owns the duration
+            addDuration(url, newStatus)
         else:
-            summary[report.url]["previousTimeout"] = report.nextTimeout
-        summary[report.url][str(report.status)]["iterations"] += 1
-    except KeyError:
-        # First iteration
-        summary[report.url] = {}
-        summary[report.url][str(report.status)] = {}
-        summary[report.url][str(report.status)]["duration"] = 0
-        summary[report.url]["previousTimeout"] = report.nextTimeout
-        summary[report.url][str(report.status)]["iterations"] = 1
-    return
+            # old status owns the duration
+            addDuration(url, summary['lastStatus'])
+        updateUrlData(newStatus, nextTimeout, url)
 
 
-def updateSummary_badBias(report: StatusReport):
-    return
+def addDuration(url: str, status: str):
+    global summary
+    summary[f'{url}|{
+        status}']['totalDuration'] += summary[f'{url}']['previousDuration']
 
 
-def updateSummary_mixedBias(report: StatusReport):
-    return
+def incrementOccurence(url: str, newStatus: str):
+    global summary
+    summary[f'{url}|{newStatus}']['occurences'] += 1
+    logger.debug(f'{url}|{newStatus} occurences added, current occurences: {
+                 summary[f'{url}|{newStatus}']['occurences']}')
 
 
-def updateSummary_goodBias(report: StatusReport):
-    return
+def updateUrlData(newStatus: str, nextTimeout: int, url: str):
+    global summary
+    summary[f'{url}']['lastStatus'] = newStatus
+    summary[f'{url}']['previousDuration'] = nextTimeout
 
 
-def updateSummary(report: StatusReport):
+def insertNewSummaryKey(url: str, status: str, duration: int):
+    global summary
+    summary[f'{url}|{status}'] = {}
+    summary[f'{url}|{status}']['totalDuration'] = 0
+    summary[f'{url}|{status}']['occurences'] = 0
+    summary[f'{url}'] = {}
+    summary[f'{url}']['previousDuration'] = duration
+    summary[f'{url}']['lastStatus'] = status
+
+
+def safeSummaryUpdate(report: StatusReport):
     try:
+        updateSummaryKey_safe(report.url, report.status, report.nextTimeout)
+    except KeyError as ke:
+        logger.error(ke)
+        insertNewSummaryKey(report.url, report.status, report.nextTimeout)
+    return
 
-        summary[report.url][str(report.status)] += 1
-        summary[report.url][str(report.status)
-                            ]["duration"] += report.nextTimeout
-        summary[report.url]["lastStatus"] = report.status
+
+def unsafeSummaryUpdate(report: StatusReport):
+    try:
+        updateSummaryKey_unsafe(report.url, report.status, report.nextTimeout)
     except KeyError:
-        # First iteration
-        summary[report.url] = {}
-        summary[report.url][str(report.status)] = 1
+        insertNewSummaryKey(report.url, report.status, report.nextTimeout)
+    return
 
 
 def is_valid_url(url):
@@ -109,11 +150,11 @@ def validate_arguments(arguments, lineNumber):
 
 
 async def main():
-    global short_sleep
-    global long_sleep
-    global repetitions
+    global _short_sleep
+    global _long_sleep
+    global _repetitions
     subscribe_to_status_updates(logInfo)
-    subscribe_to_status_updates(updateSummary_perfectionist)
+    subscribe_to_status_updates(safeSummaryUpdate)
 
     async with asyncio.TaskGroup() as tg:
         if not sys.stdin.isatty():
@@ -127,10 +168,10 @@ async def main():
 
                 url = _arguments[0]
                 short_sleep = _arguments[1] if 1 < len(
-                    _arguments) else short_sleep
+                    _arguments) else _short_sleep
                 long_sleep = _arguments[2] if 2 < len(
-                    _arguments) else long_sleep
-                reps = _arguments[3] if 3 < len(_arguments) else repetitions
+                    _arguments) else _long_sleep
+                reps = _arguments[3] if 3 < len(_arguments) else _repetitions
                 tg.create_task(start_website_checker(
                     url,
                     short_sleep,
@@ -142,7 +183,7 @@ async def main():
 
     if sys.stdin.isatty():
         tg.create_task(start_website_checker(
-            url, short_sleep, long_sleep, reps))
+            _url, _short_sleep, _long_sleep, _repetitions))
 
 if __name__ == "__main__":
     try:
